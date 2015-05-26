@@ -1,7 +1,12 @@
-[database]
-username = "root"
-password = "password"
-host = "localhost"
-dbname = "demo"
-type="mysql"
-charset="utf8"
+[production]
+db.username = "root"
+db.password = "naresh"
+db.host = "localhost"
+db.dbname = "codeception"
+db.type="mysql"
+db.charset="utf8"
+
+[development]
+
+[testing]
+db.dbname = "codeception_demo"
