@@ -1,0 +1,5 @@
+.idea/
+config/application.ini
+tests/
+vendor/
+/nbproject/private/

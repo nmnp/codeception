@@ -1,0 +1,99 @@
+
+<html ng-app="codeceptionDemo">
+<head>
+    <link rel="stylesheet" type="text/css" href="<?php echo URL . 'css/bootstrap.min.css' ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo URL . 'css/taskman.css' ?>"/>
+    <title>Codeception Demo</title>
+</head>
+<body ng-controller="tasksController">
+
+<div class="navbar navbar-default" id="navbar">
+    <div class="container" id="navbar-container">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">
+                <small>
+                    <i class="glyphicon glyphicon glyphicon-log-out"></i>
+                    Welcome <?php echo $_SESSION['name'];?>
+                </small>
+            </a><!-- /.brand -->
+
+        </div>
+        <!-- /.navbar-header -->
+        <div class="navbar-header pull-right" role="navigation">
+            <a href="/user/logout"
+               class="btn btn-sm btn-danger nav-button-margin" id="logout"> <i class="glyphicon glyphicon-log-out"></i>&nbsp;
+                Logout</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+        <blockquote>
+            <h1>
+                <a href="javascript:void(0)">Codeception Demo Application</a>
+            </h1>
+        </blockquote>
+        <div class="col-sm-9">
+            <div class="widget-box" id="recent-box" ng-controller="tasksController">
+                <div class="widget-header header-color-blue">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4 class="bigger lighter">
+                                <i class="glyphicon glyphicon-align-justify"></i>&nbsp;
+                                TASK MANAGER
+                            </h4>
+                        </div>
+                        <div class="col-sm-3">
+                            <button ng-click="addNewClicked=!addNewClicked;"
+                                    class="btn btn-sm btn-danger header-elements-margin" id="add-new-task-form"><i
+                                    class="glyphicon  glyphicon-plus" ></i>&nbsp;Add New Task
+                            </button>
+                        </div>
+                        <div class="col-sm-3">
+
+                            <input type="text" ng-model="filterTask" class="form-control search header-elements-margin"
+                                   placeholder="Filter Tasks">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-body ">
+                    <form ng-init="addNewClicked=false; " ng-if="addNewClicked" id="newTaskForm" class="add-task">
+                        <div class="form-actions">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="comment" ng-model="taskInput"
+                                       placeholder="Add New Task" ng-focus="addNewClicked" id="add-new-task-input-field">
+
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" ng-click="addTask(taskInput)" id="add-new-task-button"><i
+                                            class="glyphicon glyphicon-plus" ></i>&nbsp;Add New Task
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="task">
+                        <label class="checkbox" ng-repeat="task in tasks | filter : filterTask">
+                            <input
+                                type="checkbox"
+                                value="{{task.STATUS}}"
+                                ng-checked="task.STATUS==2"
+                                ng-click="toggleStatus(task.ID,task.STATUS, task.TASK)"/>
+                            <span ng-class="{strike:task.STATUS==2}">{{task.TASK}} [{{task.ID}}]</span>
+                            <a ng-click="deleteTaskWithoutPopup(task.ID)" id="task-nopoup-{{task.ID}}" href="javascript:void(0)" class="pull-right delete-task-nopopup">
+                            <a ng-click="deleteTask(task.ID)" id="task-{{task.ID}}" href="javascript:void(0)" class="pull-right delete-task">
+                                <i class="glyphicon glyphicon-trash"></i></a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="<?php echo URL . 'js/angular.min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo URL . 'js/app.js' ?>"></script>
+<script type="text/javascript" src="<?php echo URL . 'js/jquery-2.1.3.min.js' ?>"></script>
+</body>
+</html>

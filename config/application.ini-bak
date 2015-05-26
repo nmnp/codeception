@@ -1,0 +1,7 @@
+[database]
+username = "root"
+password = "password"
+host = "localhost"
+dbname = "demo"
+type="mysql"
+charset="utf8"
